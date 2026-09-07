@@ -45,8 +45,8 @@ public class AuthService {
         Authentication authentication = authenticationManager.authenticate(authRequest);
         String token = jwtService.generateToken(authentication);
 
-        String role = utilisateurRepository.findByEmail(login).orElseThrow().getRole();
-        return new TokenResponseDTO(token, role);
+        Utilisateur user = utilisateurRepository.findByEmail(login).orElseThrow();
+        return new TokenResponseDTO(token, user.getRole(), user.getId());
     }
 
     public Utilisateur getCurrentUser() {

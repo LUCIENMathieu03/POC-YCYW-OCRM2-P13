@@ -1,0 +1,12 @@
+<h1>Chat</h1>
+
+<div>
+  @for (message of messages; track message.id) {
+    <p><strong>{{ message.senderName }} ({{ message.senderEmail }})</strong> : {{ message.content }}</p>
+  }
+</div>
+
+<form (ngSubmit)="onSubmit()">
+  <input name="newMessage" type="text" [(ngModel)]="newMessage" required>
+  <button type="submit">Envoyer</button>
+</form>

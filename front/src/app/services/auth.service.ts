@@ -6,6 +6,7 @@ import { API_BASE_URL } from '../api-config';
 export interface TokenResponse {
   token: string;
   role: string;
+  id: number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -17,23 +18,30 @@ export class AuthService {
       .post<TokenResponse>(`${API_BASE_URL}/auth/login`, { email, password })
       .pipe(
         tap((response) => {
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('role', response.role);
+          sessionStorage.setItem('token', response.token);
+          sessionStorage.setItem('role', response.role);
+          sessionStorage.setItem('userId', String(response.id));
         })
       );
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('role');
+    sessionStorage.removeItem('userId');
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return sessionStorage.getItem('token');
   }
 
   getRole(): string | null {
-    return localStorage.getItem('role');
+    return sessionStorage.getItem('role');
+  }
+
+  getUserId(): number | null {
+    const value = sessionStorage.getItem('userId');
+    return value ? Number(value) : null;
   }
 
   isLoggedIn(): boolean {
