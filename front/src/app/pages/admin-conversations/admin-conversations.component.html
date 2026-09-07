@@ -1,0 +1,9 @@
+<h1>Conversations</h1>
+
+<ul>
+  @for (client of clients; track client.id) {
+    <li>
+      <button (click)="openConversation(client.id)">{{ client.name }} ({{ client.email }})</button>
+    </li>
+  }
+</ul>
