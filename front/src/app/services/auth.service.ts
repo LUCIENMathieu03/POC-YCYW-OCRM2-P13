@@ -25,12 +25,6 @@ export class AuthService {
       );
   }
 
-  logout(): void {
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('role');
-    sessionStorage.removeItem('userId');
-  }
-
   getToken(): string | null {
     return sessionStorage.getItem('token');
   }

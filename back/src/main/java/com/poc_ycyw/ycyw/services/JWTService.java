@@ -12,13 +12,10 @@ import java.time.temporal.ChronoUnit;
 public class JWTService {
 
     private final JwtEncoder jwtEncoder;
-    private final JwtDecoder jwtDecoder;
 
-    public JWTService(JwtEncoder jwtEncoder, JwtDecoder jwtDecoder) {
+    public JWTService(JwtEncoder jwtEncoder) {
         this.jwtEncoder = jwtEncoder;
-        this.jwtDecoder = jwtDecoder;
     }
-
 
     public String generateToken(Authentication authentication) {
         Instant now = Instant.now();
@@ -30,9 +27,5 @@ public class JWTService {
                 .build();
         JwtEncoderParameters jwtEncoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(), claims);//prepare header + payload dans un objet prêt à être signé par JwtEncoder
         return this.jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
-    }
-
-    public Jwt decodeToken(String token) {
-        return jwtDecoder.decode(token);
     }
 }
