@@ -1,4 +1,4 @@
-package com.poc_ycyw.ycyw;
+package com.poc_ycyw.ycyw.services;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;

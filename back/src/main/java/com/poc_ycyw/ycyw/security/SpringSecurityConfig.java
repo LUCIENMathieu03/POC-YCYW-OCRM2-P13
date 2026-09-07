@@ -40,7 +40,8 @@ public class SpringSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/api/",
                         "/api/auth/register",
-                        "/api/auth/login"
+                        "/api/auth/login",
+                        "/ws/**"
                 ).permitAll().anyRequest().authenticated())
                 .cors(Customizer.withDefaults())
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
